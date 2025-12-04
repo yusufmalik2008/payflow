@@ -2,7 +2,11 @@
 
 ```markdown
 # Order & Payment System  
-**Sistem Order dan Pembayaran**
+Sistem Order dan Pembayaran
+
+
+**note: untuk saat ini deploy ke Netlify belum pakai **backend** cuma frontend NextJS + shadcn/ui nya saja, jika mau
+bisa langsung git clone dan run aja di local dev 
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![NestJS](https://img.shields.io/badge/NestJS-v10-red)](https://nestjs.com/)
@@ -17,10 +21,10 @@ Sistem full-stack modern untuk mengelola order dan pembayaran menggunakan **arsi
 
 | Layer           | Technology                          |
 |-----------------|-------------------------------------|
-| Frontend        | Next.js 16 (App Router), TypeScript, Tailwind CSS, shadcn/ui |
+| Frontend        | Next.js 16 (App Router), TypeScript, Tailwind CSS, shadcn/ui, lucide-react |
 | Backend         | NestJS 10+, TypeScript, Prisma      |
 | Messaging       | NATS (microservice communication)  |
-| Database        | PostgreSQL (via Prisma)             |
+| Database        | SQLite (via Prisma)             |
 | Package Manager | npm / pnpm / yarn                   |
 
 ## 📦 Project Structure / Struktur Proyek
@@ -36,7 +40,7 @@ order-payment-project/
 
 ### Prerequisites / Persyaratan
 - Node.js ≥ 18
-- PostgreSQL running
+- SQLite running
 - NATS Server running on port `4222`
 
 ### 1. Start NATS Server (Wajib!)
@@ -48,7 +52,7 @@ docker run -d --name nats -p 4222:4222 nats:latest
 nats-server -p 4222
 ```
 
-> **JANGAN LUPA jalankan NATS di port 4222 sebelum menjalankan backend!**
+> **JANGAN LUPA jalankan NATS di port 4222, NestJS backend di port 3001, NextJS di port 3000 sebelum menjalankan!**
 
 ### 2. Setup Backend
 ```bash
@@ -58,6 +62,10 @@ npm install
 npx prisma generate
 npx prisma migrate dev  # or migrate deploy in production
 npm run start:dev       # or "nest start"
+
+# atau cuma
+npm install
+nest start
 ```
 → Backend berjalan di **http://localhost:3001**
 
@@ -79,12 +87,6 @@ npm run dev
 | Frontend    | `npm run dev`            | http://localhost:3000      |
 
 ## 📝 Environment Variables / Variabel Lingkungan
-
-### Backend (.env)
-```env
-DATABASE_URL="postgresql://user:pass@localhost:5432/orderdb"
-NATS_URL="nats://localhost:4222"
-```
 
 ### Frontend (.env.local)
 ```env
