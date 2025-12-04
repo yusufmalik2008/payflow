@@ -1,6 +1,5 @@
 ### `README.md`
 
-```markdown
 # Order & Payment System  
 Sistem Order dan Pembayaran
 
